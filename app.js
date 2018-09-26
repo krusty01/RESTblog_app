@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var mongoose = require("mongoose");
 var bodyParser=require("body-parser");
+var methodOverride = require("method-override");
 
 
 
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 //express serving css from pudlic directory
+app.use(methodOverride("_method"));
 
 
 //Mongoose app config
@@ -84,8 +86,30 @@ app.get("/blogs/:id", function(req, res){
    })
   });
 
+//edit routes
+app.get("/blogs/:id/edit", function(req, res){
+  Blog.findById(req.params.id, function(err foundBlog){
+    if(err){
+      re.redirect("/blogs");
+    }else{
+      res.render("edit", {blog: foundBlog});
+    }
+  });
+
+});
+
+//Update route
+app.put("/blogs/:id", function(req, red){
+  Blog.findById(id, newData, req.body.blog, function(err, updatedBlog){
+    if(err){
+      res.redirect(("/blogs");
+    }else{
+      res.redirect("/blogs/"+ req.params.id);
+    }
+  });
+});
 
 
-app.listen(3000, function(req, res){
+app.listen(3000, function(){
   console.log("Server started!!!");
-})
+});
