@@ -1,4 +1,4 @@
-<% include./partials/header %>
+<% include ./partials/header %>
 
 
 <h1>Index Page!</h1>
@@ -6,12 +6,12 @@
 <% blogs.forEach(function(blog){ %>
    <div>
       <h2><%= blog.title %></h2>
-      <img src="<% blog.image %>">
+      <img src="<%= blog.image %>">
       <span><%= blog.created %></span>
-      <p><%= blog.created %></p>
+      <p><%= blog.body %></p>
    </div>
 
 <% }) %>
 
 
-<% include./partials/footer %>
+<% include ./partials/footer %>
