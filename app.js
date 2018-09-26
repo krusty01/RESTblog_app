@@ -24,15 +24,35 @@ var blogSchema = new mongoose.Schema({
 
 var Blog = mongoose.model("Blog", blogSchema);
 
-Blog.create({
-  title: "Test Blog",
-  image: "https://cdn.pixabay.com/photo/2015/11/07/11/34/kitten-1031261__340.jpg",
-  body: "Hello this is a blog post"
-
-});
+// Blog.create({
+//   title: "Test Blog",
+//   image: "https://cdn.pixabay.com/photo/2015/11/07/11/34/kitten-1031261__340.jpg",
+//   body: "Hello this is a blog post"
+//
+// });
 
 
 //RESTful routes
+
+//root route
+app.get("/", function(req, res){
+  res.redirect("/blogs");
+});
+
+
+// GET index route
+app.get("/blogs", function (req, res){
+  Blog.find({}, function(err, blogs){
+    if(err){
+      console.log("Error!");
+    }else {
+      res.render("index", {blogs: blogs});
+    }
+  });
+});
+
+
+
 
 
 app.listen(3000, function(req, res){
