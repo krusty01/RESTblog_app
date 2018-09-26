@@ -1,0 +1,40 @@
+var express = require("express");
+var app = express();
+var mongoose = require("mongoose");
+var bodyParser=require("body-parser");
+
+
+
+//Mongoose model config
+mongoose.connect("mongodb://localhost/blog_app" ,{useNewUrlParser: true });
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+//express serving css from pudlic directory
+
+
+//Mongoose app config
+var blogSchema = new mongoose.Schema({
+  title: String,
+  image: String,
+  body: String,
+  created: {type: Date, default: Date.now}
+});
+
+var Blog = mongoose.model("Blog", blogSchema);
+
+Blog.create({
+  title: "Test Blog",
+  image: "https://cdn.pixabay.com/photo/2015/11/07/11/34/kitten-1031261__340.jpg",
+  body: "Hello this is a blog post"
+
+});
+
+
+//RESTful routes
+
+
+app.listen(3000, function(req, res){
+  console.log("Server started!!!");
+})
