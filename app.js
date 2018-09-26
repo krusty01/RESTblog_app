@@ -109,6 +109,20 @@ app.put("/blogs/:id", function(req, red){
   });
 });
 
+// destroy routes
+app.delete("/blogs/:id", function (req, res){
+  //destroy blog
+  Blog.findByIdAndRemove(req.params.id, function(err){
+    if(err){
+      res.redirect("/blogs");
+    }else{
+      //redirect
+      res.redirect("/blogs");
+    }
+  });
+
+});
+
 
 app.listen(3000, function(){
   console.log("Server started!!!");
