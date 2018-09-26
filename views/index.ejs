@@ -8,7 +8,9 @@
       <h2><%= blog.title %></h2>
       <img src="<%= blog.image %>">
       <span><%= blog.created %></span>
-      <p><%= blog.body %></p>
+      <p><%= blog.body.substring(0, 100) %>...</p>
+      <!-- substring limits number of characters allowed to place -->
+      <a href="/blogs/<%= blogs._id %>">Read More</a>
    </div>
 
 <% }) %>
